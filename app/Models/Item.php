@@ -9,7 +9,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'status'];
+    protected $fillable = ['name', 'status', 'comments'];
 
     public function scopeAllowed($query) {
         return $query->where('status', 'Allowed');

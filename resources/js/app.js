@@ -1,11 +1,10 @@
 require('./bootstrap');
 
-window.Vue = require('vue').default;
+import Vue from 'vue';
+import ItemApp from './components/ItemApp.vue';
 
-// Register components
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('item-app', ItemApp);
 
-// Create Vue instance
-const app = new Vue({
+new Vue({
     el: '#app',
 });

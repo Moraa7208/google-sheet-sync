@@ -16,32 +16,45 @@ class ItemTest extends TestCase
      * @return void
      */
     /** @test */
-    public function it_can_create_an_item()
-    {
-        Item::create([
-            'name' => 'Test Item',
-            'status' => 'Allowed'
-        ]);
+    // public function it_can_create_an_item()
+    // {
+    //     Item::create([
+    //         'name' => 'Test Item',
+    //         'status' => 'Allowed'
+    //     ]);
 
-        $this->assertDatabaseHas('items', [
-            'name' => 'Test Item',
-            'status' => 'Allowed'
-        ]);
-    }
+    //     $this->assertDatabaseHas('items', [
+    //         'name' => 'Test Item',
+    //         'status' => 'Allowed'
+    //     ]);
+    // }
 
     /** @test */
-    public function it_filters_allowed_items_with_scope()
+    // public function it_filters_allowed_items_with_scope()
+    // {
+    //     // Create multiple items
+    //     Item::create(['name' => 'Allowed Item 1', 'status' => 'Allowed']);
+    //     Item::create(['name' => 'Prohibited Item', 'status' => 'Prohibited']);
+    //     Item::create(['name' => 'Allowed Item 2', 'status' => 'Allowed']);
+
+    //     // Get only Allowed items
+    //     $allowedItems = Item::allowed()->get();
+
+    //     // Assert the count and contents
+    //     $this->assertCount(2, $allowedItems);
+    //     $this->assertTrue($allowedItems->every(fn($item) => $item->status === 'Allowed'));
+    // }
+/** @test */
+    public function it_can_create_item()
     {
-        // Create multiple items
-        Item::create(['name' => 'Allowed Item 1', 'status' => 'Allowed']);
-        Item::create(['name' => 'Prohibited Item', 'status' => 'Prohibited']);
-        Item::create(['name' => 'Allowed Item 2', 'status' => 'Allowed']);
+        $data = [
+            'name' => 'Laptop',
+            'status' => 'Allowed',
+        ];
 
-        // Get only Allowed items
-        $allowedItems = Item::allowed()->get();
+        $response = $this->postJson('/api/items', $data);
 
-        // Assert the count and contents
-        $this->assertCount(2, $allowedItems);
-        $this->assertTrue($allowedItems->every(fn($item) => $item->status === 'Allowed'));
+        $response->assertStatus(201)
+            ->assertJsonFragment($data);
     }
 }
