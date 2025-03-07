@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["php82", "php82Extensions.pdo_mysql", "nodejs", "yarn"]
+nixPkgs = ["php82", "php82Extensions.pdo_mysql", "nodejs", "yarn", "composer"]
 
 [phases.install]
 cmds = ["composer install --no-dev"]
