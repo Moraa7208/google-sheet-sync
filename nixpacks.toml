@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["php82", "php82Extensions.pdo_mysql", "nodejs", "yarn"]
+
+[phases.install]
+cmds = ["composer install --no-dev"]
+
+[phases.build]
+cmds = [
+  "npm ci",
+  "npm run production"
+]
+
+[start]
+cmd = "php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
